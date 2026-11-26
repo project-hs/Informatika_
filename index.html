@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INFORMATIKA LEARNING HUB – Explore, Learn, Create | Kelas X SMK</title>
+    
+    <!-- Google Fonts: Poppins & Inter & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Tailwind Custom Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Poppins', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        navy: {
+                            950: '#040814',
+                            900: '#070E24',
+                            800: '#0D193B',
+                            700: '#152654',
+                        },
+                        electric: {
+                            500: '#2563EB',
+                            400: '#3B82F6',
+                        },
+                        cyber: {
+                            cyan: '#06B6D4',
+                            glow: '#22D3EE',
+                            purple: '#8B5CF6',
+                        }
+                    },
+                    animation: {
+                        'float-slow': 'float 6s ease-in-out infinite',
+                        'float-medium': 'float 4.5s ease-in-out infinite',
+                        'float-fast': 'float 3.5s ease-in-out infinite',
+                        'pulse-glow': 'pulseGlow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'spin-slow': 'spin 20s linear infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-14px)' },
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { opacity: 0.4, transform: 'scale(1)' },
+                            '50%': { opacity: 0.8, transform: 'scale(1.05)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom CSS Styles (Glassmorphism, Scrollbar, Reveal Animations, Custom Glows) -->
+    <style>
+        /* Base Styling & Gradient Background */
+        body {
+            background-color: #040814;
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(37, 99, 235, 0.16) 0%, transparent 45%),
+                radial-gradient(circle at 85% 30%, rgba(139, 92, 246, 0.14) 0%, transparent 45%),
+                radial-gradient(circle at 50% 85%, rgba(6, 182, 212, 0.12) 0%, transparent 50%);
+            color: #F8FAFC;
+            overflow-x: hidden;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #040814;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #2563EB, #06B6D4);
+            border-radius: 9999px;
+        }
+
+        /* Glassmorphism Utilities */
+        .glass-nav {
+            background: rgba(7, 14, 36, 0.72);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(56, 189, 248, 0.15);
+        }
+
+        .glass-nav-scrolled {
+            background: rgba(4, 8, 20, 0.88);
+            box-shadow: 0 10px 30px -10px rgba(6, 182, 212, 0.2);
+            border-bottom: 1px solid rgba(34, 211, 238, 0.25);
+        }
+
+        .glass-card {
+            background: linear-gradient(145deg, rgba(13, 25, 59, 0.65) 0%, rgba(7, 14, 36, 0.8) 100%);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(56, 189, 248, 0.14);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.35);
+            transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(34, 211, 238, 0.45);
+            box-shadow: 0 20px 40px -12px rgba(6, 182, 212, 0.22), 0 0 20px rgba(37, 99, 235, 0.15);
+        }
+
+        /* Icon Glow on Card Hover */
+        .glass-card:hover .card-icon-wrapper {
+            box-shadow: 0 0 25px rgba(34, 211, 238, 0.5);
+            transform: scale(1.06);
+        }
+
+        .card-icon-wrapper {
+            transition: all 0.35s ease;
+        }
+
+        /* Text Gradient */
+        .text-gradient {
+            background: linear-gradient(135deg, #38BDF8 0%, #3B82F6 50%, #A855F7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .text-gradient-cyan {
+            background: linear-gradient(90deg, #22D3EE 0%, #60A5FA 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Scroll Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: all 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Subtle Tech Grid Overlay */
+        .bg-tech-grid {
+            background-size: 44px 44px;
+            background-image: 
+                linear-gradient(to right, rgba(56, 189, 248, 0.04) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(56, 189, 248, 0.04) 1px, transparent 1px);
+        }
+
+        /* Hamburger Animation */
+        .hamburger-line {
+            transition: all 0.3s ease-in-out;
+        }
+        .hamburger-open .line-1 {
+            transform: translateY(7px) rotate(45deg);
+        }
+        .hamburger-open .line-2 {
+            opacity: 0;
+        }
+        .hamburger-open .line-3 {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
+        /* Floating Quick-Nav Dock when Scrolled */
+        .floating-dock {
+            transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-cyan-500/30 selection:text-cyan-200 relative">
+
+    <!-- Scroll Progress Indicator Bar -->
+    <div class="fixed top-0 left-0 w-full h-1 z-[60] bg-navy-950/60">
+        <div id="scroll-progress" class="h-full w-0 bg-gradient-to-r from-blue-500 via-cyan-400 to-purple-500 shadow-[0_0_12px_rgba(34,211,238,0.8)] transition-all duration-100"></div>
+    </div>
+
+    <!-- Interactive Digital Network Canvas Background -->
+    <canvas id="network-canvas" class="fixed inset-0 w-full h-full pointer-events-none z-0 opacity-65"></canvas>
+    <div class="fixed inset-0 bg-tech-grid pointer-events-none z-0"></div>
+
+    <!-- ==================== 2. HEADER / STICKY NAVBAR ==================== -->
+    <header id="navbar" class="sticky top-0 z-50 glass-nav transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- Brand Logo -->
+                <a href="#beranda" class="flex items-center gap-3 group focus:outline-none">
+                    <div class="relative w-11 h-11 rounded-xl bg-gradient-to-br from-blue-600 via-cyan-500 to-purple-600 p-[1.5px] shadow-[0_0_20px_rgba(6,182,212,0.35)] group-hover:shadow-[0_0_28px_rgba(34,211,238,0.65)] transition-all duration-300">
+                        <div class="w-full h-full bg-navy-950 rounded-[10px] flex items-center justify-center">
+                            <!-- Custom Tech Monitor SVG Logo -->
+                            <svg class="w-6 h-6 text-cyan-400 group-hover:scale-110 transition-transform duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="2" y="3" width="20" height="14" rx="2.5" class="stroke-cyan-400"/>
+                                <path d="M8 21h8M12 17v4" class="stroke-blue-400"/>
+                                <path d="M8 9l-2 2 2 2M16 9l2 2-2 2M13 8l-2 6" class="stroke-purple-400" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="font-heading font-bold text-base sm:text-lg tracking-wide text-white leading-tight">
+                            INFORMATIKA <span class="text-cyan-400">HUB</span>
+                        </span>
+                        <span class="text-[11px] font-mono tracking-widest text-slate-400 uppercase">
+                            Explore • Learn • Create
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation Menu -->
+                <nav class="hidden md:flex items-center space-x-2 lg:space-x-3" aria-label="Navigasi Utama">
+                    <a href="#beranda" class="nav-link active-nav px-4 py-2 rounded-xl text-sm font-medium text-cyan-300 bg-cyan-500/10 border border-cyan-500/25 transition-all duration-200">
+                        Beranda
+                    </a>
+                    <a href="#materi" class="nav-link px-4 py-2 rounded-xl text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all duration-200">
+                        Materi
+                    </a>
+                    <a href="https://cbt-informatika-ten.vercel.app/" target="_blank" rel="noopener noreferrer" class="nav-link px-4 py-2 rounded-xl text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all duration-200 flex items-center gap-1.5">
+                        <span>Latihan SAS</span>
+                        <span class="px-1.5 py-0.5 text-[10px] font-mono font-semibold bg-purple-500/20 text-purple-300 border border-purple-400/30 rounded-md">CBT</span>
+                    </a>
+                    <a href="#tentang" class="nav-link px-4 py-2 rounded-xl text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all duration-200">
+                        Tentang
+                    </a>
+                </nav>
+
+                <!-- Desktop CTA Button -->
+                <div class="hidden md:flex items-center gap-3">
+                    <a href="#materi" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 shadow-[0_0_20px_rgba(37,99,235,0.4)] hover:shadow-[0_0_25px_rgba(6,182,212,0.6)] transition-all duration-300 transform hover:-translate-y-0.5">
+                        <i data-lucide="sparkles" class="w-4 h-4"></i>
+                        <span>Mulai Belajar</span>
+                    </a>
+                </div>
+
+                <!-- Mobile Hamburger Button -->
+                <div class="flex md:hidden">
+                    <button id="mobile-menu-btn" type="button" aria-label="Buka Menu Navigasi" aria-expanded="false" class="p-3 rounded-xl bg-navy-800/80 border border-cyan-500/25 text-slate-200 hover:text-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/50 transition-colors">
+                        <div class="w-6 h-5 flex flex-col justify-between items-center">
+                            <span class="hamburger-line line-1 w-6 h-0.5 bg-current rounded-full"></span>
+                            <span class="hamburger-line line-2 w-6 h-0.5 bg-current rounded-full"></span>
+                            <span class="hamburger-line line-3 w-6 h-0.5 bg-current rounded-full"></span>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Dropdown Navigation -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-cyan-500/15 bg-navy-950/95 backdrop-blur-xl px-4 pt-3 pb-6 space-y-2 shadow-2xl">
+            <a href="#beranda" class="mobile-nav-link block px-4 py-3 rounded-xl text-base font-medium text-cyan-300 bg-cyan-500/10 border border-cyan-500/20">
+                Beranda
+            </a>
+            <a href="#materi" class="mobile-nav-link block px-4 py-3 rounded-xl text-base font-medium text-slate-300 hover:text-white hover:bg-white/5">
+                Materi Pembelajaran
+            </a>
+            <a href="https://cbt-informatika-ten.vercel.app/" target="_blank" rel="noopener noreferrer"  class="mobile-nav-link flex items-center justify-between px-4 py-3 rounded-xl text-base font-medium text-slate-300 hover:text-white hover:bg-white/5">
+                <span>Latihan SAS CBT</span>
+                <span class="px-2 py-0.5 text-xs font-mono bg-purple-500/20 text-purple-300 rounded-md border border-purple-500/30">Kelas X</span>
+            </a>
+            <a href="#tentang" class="mobile-nav-link block px-4 py-3 rounded-xl text-base font-medium text-slate-300 hover:text-white hover:bg-white/5">
+                Tentang & Tips Belajar
+            </a>
+            <div class="pt-3 border-t border-slate-800/80">
+                <a href="#materi" class="mobile-nav-link w-full flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-base font-semibold text-white bg-gradient-to-r from-blue-600 to-cyan-500 shadow-lg">
+                    <i data-lucide="rocket" class="w-4 h-4"></i>
+                    <span>Mulai Belajar Sekarang</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Floating Quick-Access Tab Bar (Muncul melayang saat halaman digulir ke bawah) -->
+    <div id="floating-tab-bar" class="floating-dock fixed bottom-5 left-1/2 -translate-x-1/2 z-40 translate-y-24 opacity-0 pointer-events-none">
+        <div class="flex items-center gap-1.5 sm:gap-2 px-3 py-2 rounded-2xl bg-navy-900/90 backdrop-blur-xl border border-cyan-400/30 shadow-[0_10px_35px_rgba(0,0,0,0.65),0_0_20px_rgba(6,182,212,0.2)]">
+            <a href="#beranda" class="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs sm:text-sm font-medium text-slate-300 hover:text-cyan-300 hover:bg-cyan-500/15 transition-all" title="Ke Atas">
+                <i data-lucide="home" class="w-4 h-4 text-cyan-400"></i>
+                <span class="hidden sm:inline">Beranda</span>
+            </a>
+            <a href="#materi" class="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs sm:text-sm font-medium text-slate-300 hover:text-cyan-300 hover:bg-cyan-500/15 transition-all">
+                <i data-lucide="book-open" class="w-4 h-4 text-blue-400"></i>
+                <span>Materi</span>
+            </a>
+            <a href="https://cbt-informatika-ten.vercel.app/" target="_blank" rel="noopener noreferrer"  class="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs sm:text-sm font-medium text-slate-300 hover:text-purple-300 hover:bg-purple-500/15 transition-all">
+                <i data-lucide="award" class="w-4 h-4 text-purple-400"></i>
+                <span>Latihan SAS CBT</span>
+            </a>
+            <a href="#tentang" class="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs sm:text-sm font-medium text-slate-300 hover:text-cyan-300 hover:bg-cyan-500/15 transition-all">
+                <i data-lucide="lightbulb" class="w-4 h-4 text-amber-400"></i>
+                <span class="hidden sm:inline">Tips</span>
+            </a>
+            <button id="scroll-top-btn" aria-label="Kembali ke Atas" class="p-2 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 text-white hover:brightness-110 transition-all shadow-md">
+                <i data-lucide="arrow-up" class="w-4 h-4"></i>
+            </button>
+        </div>
+    </div>
+
+    <main class="relative z-10">
+        <!-- ==================== 3. HERO SECTION ==================== -->
+        <section id="beranda" class="relative pt-10 pb-20 lg:pt-16 lg:pb-28 overflow-hidden">
+            <!-- Ambient Glowing Orbs -->
+            <div class="absolute top-12 left-10 w-72 h-72 bg-blue-600/20 rounded-full blur-[110px] pointer-events-none"></div>
+            <div class="absolute bottom-10 right-10 w-80 h-80 bg-cyan-500/15 rounded-full blur-[120px] pointer-events-none"></div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+                    
+                    <!-- Left Content Column -->
+                    <div class="lg:col-span-7 text-center lg:text-left space-y-6">
+                        <!-- EdTech Status Badge -->
+                        <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-navy-800/80 border border-cyan-500/30 shadow-[0_0_20px_rgba(6,182,212,0.15)]">
+                            <span class="relative flex h-2.5 w-2.5">
+                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-cyan-400"></span>
+                            </span>
+                            <span class="text-xs sm:text-sm font-mono font-medium text-cyan-300 tracking-wide">
+                                PORTAL DIGITAL • INFORMATIKA KELAS X SMK
+                            </span>
+                        </div>
+
+                        <!-- Main Headings -->
+                        <div class="space-y-3">
+                            <p class="font-heading text-sm sm:text-base font-semibold tracking-[0.2em] text-blue-400 uppercase">
+                                SELAMAT DATANG DI
+                            </p>
+                            <h1 class="font-heading text-3xl sm:text-5xl lg:text-[3.35rem] font-extrabold tracking-tight text-white leading-[1.15]">
+                                INFORMATIKA <br class="hidden sm:inline">
+                                <span class="text-gradient">LEARNING HUB</span>
+                            </h1>
+                        </div>
+
+                        <!-- Tagline Quote -->
+                        <p class="font-heading text-lg sm:text-xl font-medium text-cyan-200/95 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                            "Jelajahi Dunia Teknologi, Bangun Logika, dan Ciptakan Masa Depan Digital."
+                        </p>
+
+                        <!-- Description -->
+                        <p class="text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto lg:mx-0 font-normal">
+                            Platform pembelajaran Informatika untuk membantu kamu memahami teknologi digital, berpikir komputasional, mengenal aplikasi produktivitas, dan mengembangkan keterampilan digital.
+                        </p>
+
+                        <!-- Dual Action Buttons -->
+                        <div class="pt-3 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                            <a href="#materi" class="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-7 py-4 rounded-2xl font-heading font-semibold text-sm sm:text-base text-white bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 shadow-[0_10px_30px_-5px_rgba(37,99,235,0.6)] hover:shadow-[0_15px_35px_-5px_rgba(6,182,212,0.7)] transition-all duration-300 transform hover:-translate-y-1">
+                                <i data-lucide="compass" class="w-5 h-5"></i>
+                                <span>MULAI BELAJAR</span>
+                            </a>
+
+                            <a href="https://cbt-informatika-ten.vercel.app/" target="_blank" rel="noopener noreferrer"  class="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-7 py-4 rounded-2xl font-heading font-semibold text-sm sm:text-base text-cyan-300 bg-navy-800/75 hover:bg-navy-700/90 border border-cyan-400/35 hover:border-cyan-300 shadow-[0_8px_25px_rgba(0,0,0,0.3)] hover:shadow-[0_0_25px_rgba(34,211,238,0.25)] transition-all duration-300 transform hover:-translate-y-1">
+                                <i data-lucide="file-check-2" class="w-5 h-5 text-purple-400"></i>
+                                <span>LATIHAN SAS CBT</span>
+                            </a>
+                        </div>
+
+                        <!-- Quick Metrics Strip -->
+                        <div class="pt-6 grid grid-cols-3 gap-4 max-w-lg mx-auto lg:mx-0 border-t border-slate-800/80">
+                            <div>
+                                <div class="font-heading font-bold text-xl sm:text-2xl text-white">4 Modul</div>
+                                <div class="text-xs text-slate-400">Terstruktur & Interaktif</div>
+                            </div>
+                            <div>
+                                <div class="font-heading font-bold text-xl sm:text-2xl text-cyan-400">Fase E</div>
+                                <div class="text-xs text-slate-400">Kurikulum Merdeka SMK</div>
+                            </div>
+                            <div>
+                                <div class="font-heading font-bold text-xl sm:text-2xl text-purple-400">Siap SAS</div>
+                                <div class="text-xs text-slate-400">Bank Soal & Pembahasan</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Visual Column: Custom Futuristic Tech SVG Illustration -->
+                    <div class="lg:col-span-5 relative flex items-center justify-center">
+                        <div class="relative w-full max-w-[480px] aspect-square flex items-center justify-center">
+                            
+                            <!-- Rotating Cyber Ring Backdrop -->
+                            <div class="absolute inset-4 rounded-full border border-dashed border-cyan-500/25 animate-spin-slow pointer-events-none"></div>
+                            <div class="absolute inset-12 rounded-full border border-blue-500/20 pointer-events-none"></div>
+
+                            <!-- Main Central Futuristic Workstation SVG -->
+                            <svg class="w-full h-full drop-shadow-[0_20px_50px_rgba(6,182,212,0.25)]" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ilustrasi Komputer Futuristik, Algoritma, dan Jaringan Digital">
+                                <defs>
+                                    <linearGradient id="screenGrad" x1="110" y1="140" x2="390" y2="320" gradientUnits="userSpaceOnUse">
+                                        <stop offset="0%" stop-color="#0D193B"/>
+                                        <stop offset="100%" stop-color="#050B1E"/>
+                                    </linearGradient>
+                                    <linearGradient id="cyberStroke" x1="0" y1="0" x2="500" y2="500" gradientUnits="userSpaceOnUse">
+                                        <stop offset="0%" stop-color="#22D3EE"/>
+                                        <stop offset="50%" stop-color="#3B82F6"/>
+                                        <stop offset="100%" stop-color="#A855F7"/>
+                                    </linearGradient>
+                                    <linearGradient id="cardGlass" x1="0" y1="0" x2="1" y2="1">
+                                        <stop offset="0%" stop-color="#1E3A8A" stop-opacity="0.75"/>
+                                        <stop offset="100%" stop-color="#0F172A" stop-opacity="0.9"/>
+                                    </linearGradient>
+                                </defs>
+
+                                <!-- Circuit Lines Connecting Nodes -->
+                                <g stroke="url(#cyberStroke)" stroke-width="1.5" stroke-opacity="0.45">
+                                    <path d="M90 150 H140 L165 175"/>
+                                    <path d="M410 140 H365 L340 165"/>
+                                    <path d="M85 330 H135 L160 305"/>
+                                    <path d="M415 340 H365 L340 315"/>
+                                    <circle cx="90" cy="150" r="4" fill="#22D3EE"/>
+                                    <circle cx="410" cy="140" r="4" fill="#A855F7"/>
+                                    <circle cx="85" cy="330" r="4" fill="#3B82F6"/>
+                                    <circle cx="415" cy="340" r="4" fill="#22D3EE"/>
+                                </g>
+
+                                <!-- Main Holographic Laptop Base -->
+                                <g class="animate-float-slow">
+                                    <!-- Monitor Frame -->
+                                    <rect x="120" y="145" width="260" height="175" rx="16" fill="url(#screenGrad)" stroke="url(#cyberStroke)" stroke-width="2.5"/>
+                                    <!-- Browser/IDE Top Bar -->
+                                    <path d="M120 161C120 152.163 127.163 145 136 145H364C372.837 145 380 152.163 380 161V173H120V161Z" fill="#132554"/>
+                                    <circle cx="138" cy="159" r="3.5" fill="#F43F5E"/>
+                                    <circle cx="150" cy="159" r="3.5" fill="#FBBF24"/>
+                                    <circle cx="162" cy="159" r="3.5" fill="#34D399"/>
+                                    <rect x="182" y="154" width="120" height="10" rx="5" fill="#09132E"/>
+
+                                    <!-- Code & Flowchart Inside Screen -->
+                                    <!-- Left Side: Code Lines -->
+                                    <rect x="138" y="190" width="65" height="7" rx="3.5" fill="#38BDF8"/>
+                                    <rect x="148" y="205" width="85" height="7" rx="3.5" fill="#818CF8"/>
+                                    <rect x="148" y="220" width="55" height="7" rx="3.5" fill="#22D3EE" fill-opacity="0.7"/>
+                                    <rect x="138" y="235" width="75" height="7" rx="3.5" fill="#A855F7"/>
+                                    <rect x="148" y="250" width="60" height="7" rx="3.5" fill="#38BDF8" fill-opacity="0.6"/>
+                                    <rect x="138" y="265" width="90" height="7" rx="3.5" fill="#34D399" fill-opacity="0.8"/>
+
+                                    <!-- Right Side: Mini Flowchart Diagram -->
+                                    <rect x="275" y="188" width="68" height="22" rx="11" fill="#1D4ED8" stroke="#60A5FA" stroke-width="1.5"/>
+                                    <line x1="309" y1="210" x2="309" y2="225" stroke="#22D3EE" stroke-width="1.5"/>
+                                    <!-- Decision Diamond -->
+                                    <polygon points="309,225 335,243 309,261 283,243" fill="#311042" stroke="#C084FC" stroke-width="1.5"/>
+                                    <line x1="309" y1="261" x2="309" y2="276" stroke="#22D3EE" stroke-width="1.5"/>
+                                    <!-- Process Box -->
+                                    <rect x="277" y="276" width="64" height="20" rx="5" fill="#0E7490" stroke="#22D3EE" stroke-width="1.5"/>
+
+                                    <!-- Laptop Keyboard Deck -->
+                                    <path d="M95 320H405L388 338C384 342 378 344 372 344H128C122 344 116 342 112 338L95 320Z" fill="#1E293B" stroke="url(#cyberStroke)" stroke-width="2"/>
+                                    <rect x="215" y="325" width="70" height="5" rx="2.5" fill="#38BDF8" fill-opacity="0.6"/>
+                                </g>
+
+                                <!-- Floating Card 1: Coding Badge (Top Left) -->
+                                <g class="animate-float-medium">
+                                    <rect x="42" y="78" width="116" height="56" rx="14" fill="url(#cardGlass)" stroke="#22D3EE" stroke-width="1.5"/>
+                                    <text x="64" y="112" fill="#22D3EE" font-family="JetBrains Mono, monospace" font-weight="700" font-size="18">&lt;/&gt;</text>
+                                    <text x="104" y="103" fill="#F8FAFC" font-family="Inter, sans-serif" font-weight="600" font-size="11">LOGIC</text>
+                                    <text x="104" y="118" fill="#94A3B8" font-family="Inter, sans-serif" font-size="10">Algorithm</text>
+                                </g>
+
+                                <!-- Floating Card 2: Network / Cloud Node (Top Right) -->
+                                <g class="animate-float-fast">
+                                    <rect x="342" y="72" width="116" height="56" rx="14" fill="url(#cardGlass)" stroke="#A855F7" stroke-width="1.5"/>
+                                    <circle cx="370" cy="100" r="12" fill="#A855F7" fill-opacity="0.25" stroke="#C084FC" stroke-width="1.5"/>
+                                    <circle cx="370" cy="100" r="4" fill="#E879F9"/>
+                                    <text x="390" y="97" fill="#F8FAFC" font-family="Inter, sans-serif" font-weight="600" font-size="11">SEARCH</text>
+                                    <text x="390" y="112" fill="#94A3B8" font-family="Inter, sans-serif" font-size="10">Web &amp; Net</text>
+                                </g>
+
+                                <!-- Floating Card 3: Flowchart / Data (Bottom Right) -->
+                                <g class="animate-float-medium">
+                                    <rect x="335" y="362" width="122" height="54" rx="14" fill="url(#cardGlass)" stroke="#3B82F6" stroke-width="1.5"/>
+                                    <rect x="352" y="378" width="22" height="22" rx="6" fill="#2563EB" fill-opacity="0.35" stroke="#60A5FA" stroke-width="1.5"/>
+                                    <path d="M358 389L362 393L369 385" stroke="#34D399" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <text x="383" y="386" fill="#F8FAFC" font-family="Inter, sans-serif" font-weight="600" font-size="11">SIAP SAS</text>
+                                    <text x="383" y="401" fill="#38BDF8" font-family="JetBrains Mono, monospace" font-size="10">100% Ready</text>
+                                </g>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 4. SECTION MENU PEMBELAJARAN ==================== -->
+        <section id="materi" class="py-20 lg:py-24 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <!-- Section Header -->
+                <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-400/25 text-cyan-300 text-xs font-mono uppercase tracking-wider mb-4">
+                        <i data-lucide="layers" class="w-3.5 h-3.5"></i>
+                        <span>Kurikulum Informatika SMK</span>
+                    </div>
+                    <h2 class="font-heading text-2xl sm:text-4xl font-bold text-white tracking-tight mb-4">
+                        JELAJAHI <span class="text-gradient-cyan">MATERI PEMBELAJARAN</span>
+                    </h2>
+                    <p class="text-slate-300 text-base sm:text-lg leading-relaxed">
+                        "Pilih materi yang ingin kamu pelajari dan tingkatkan kemampuan digitalmu."
+                    </p>
+                </div>
+
+                <!-- 4 Learning Module Cards Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-7 lg:gap-8">
+                    
+                    <!-- MENU 1 – ALGORITMA DAN FLOWCHART -->
+                    <article class="glass-card rounded-3xl p-7 sm:p-8 flex flex-col justify-between group reveal">
+                        <div>
+                            <div class="flex items-start justify-between gap-4 mb-6">
+                                <!-- Illustrative SVG Icon: Flowchart, Decision, Process, Coding -->
+                                <div class="card-icon-wrapper w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-600/30 to-cyan-500/20 border border-cyan-400/35 flex items-center justify-center shrink-0">
+                                    <svg class="w-9 h-9 text-cyan-300" viewBox="0 0 36 36" fill="none">
+                                        <!-- Start/Process Node -->
+                                        <rect x="11" y="3" width="14" height="6" rx="3" stroke="#38BDF8" stroke-width="2"/>
+                                        <line x1="18" y1="9" x2="18" y2="13" stroke="#38BDF8" stroke-width="2"/>
+                                        <!-- Decision Diamond -->
+                                        <polygon points="18,13 26,19 18,25 10,19" fill="#1E3A8A" stroke="#22D3EE" stroke-width="2"/>
+                                        <!-- Process Branches -->
+                                        <path d="M10 19H5V27" stroke="#818CF8" stroke-width="1.8" stroke-linecap="round"/>
+                                        <path d="M26 19H31V27" stroke="#818CF8" stroke-width="1.8" stroke-linecap="round"/>
+                                        <rect x="2" y="27" width="7" height="6" rx="1.5" stroke="#A855F7" stroke-width="1.8"/>
+                                        <rect x="27" y="27" width="7" height="6" rx="1.5" stroke="#34D399" stroke-width="1.8"/>
+                                    </svg>
+                                </div>
+                                <span class="px-3 py-1 rounded-full text-xs font-mono font-semibold bg-cyan-500/10 text-cyan-300 border border-cyan-500/25">
+                                    MODUL 01
+                                </span>
+                            </div>
+
+                            <h3 class="font-heading text-xl sm:text-2xl font-bold text-white group-hover:text-cyan-300 transition-colors mb-3">
+                                ALGORITMA DAN FLOWCHART
+                            </h3>
+
+                            <!-- Topic Tags -->
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="text-[11px] font-mono px-2.5 py-0.5 rounded-md bg-navy-800 text-slate-300 border border-slate-700/80">Flowchart</span>
+                                <span class="text-[11px] font-mono px-2.5 py-0.5 rounded-md bg-navy-800 text-slate-300 border border-slate-700/80">Decision & Process</span>
+                                <span class="text-[11px] font-mono px-2.5 py-0.5 rounded-md bg-navy-800 text-slate-300 border border-slate-700/80">Logika Coding</span>
+                            </div>
+
+                            <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-8">
+                                Pelajari cara berpikir logis dan sistematis dalam menyelesaikan masalah melalui algoritma, struktur dasar algoritma, dan flowchart.
+                            </p>
+                        </div>
+
+                        <div class="pt-4 border-t border-slate-800/80 flex items-center justify-between">
+                            <a href="algoritma.html" data-page="algoritma.html" class="w-full inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl font-heading font-semibold text-sm text-white bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 shadow-lg shadow-blue-600/20 group-hover:shadow-cyan-500/30 transition-all duration-300">
+                                <span>JELAJAHI MATERI</span>
+                                <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- MENU 2 – WEB BROWSER DAN SEARCH ENGINE -->
+                    <article class="glass-card rounded-3xl p-7 sm:p-8 flex flex-col justify-between group reveal">
+                        <div>
+                            <div class="flex items-start justify-between gap-4 mb-6">
+                                <!-- Illustrative SVG Icon: Browser Window, Search Bar, Magnifying Glass, Network -->
+                                <div class="card-icon-wrapper w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan-500/25 to-blue-600/25 border border-blue-400/35 flex items-center justify-center shrink-0">
+                                    <svg class="w-9 h-9" viewBox="0 0 36 36" fill="none">
+                                        <!-- Browser Window -->
+                                        <rect x="3" y="5" width="26" height="20" rx="3.5" fill="#0D193B" stroke="#60A5FA" stroke-width="2"/>
+                                        <line x1="3" y1="11" x2="29" y2="11" stroke="#60A5FA" stroke-width="1.8"/>
+                                        <circle cx="7" cy="8" r="1" fill="#F43F5E"/>
+                                        <circle cx="10.5" cy="8" r="1" fill="#FBBF24"/>
+                                        <circle cx="14" cy="8" r="1" fill="#34D399"/>
+                                        <!-- Search Bar inside Browser -->
+                                        <rect x="7" y="15" width="14" height="4" rx="2" fill="#1E3A8A" stroke="#38BDF8" stroke-width="1.2"/>
+                                        <!-- Magnifying Glass -->
+                                        <circle cx="25" cy="24" r="6" fill="#070E24" stroke="#22D3EE" stroke-width="2.2"/>
+                                        <line x1="29.5" y1="28.5" x2="33.5" y2="32.5" stroke="#A855F7" stroke-width="2.5" stroke-linecap="round"/>
+                                    </svg>
+                                </div>
+                                <span class="px-3 py-1 rounded-full text-xs font-mono font-semibold bg-blue-500/15 text-blue-300 border border-blue-400/30">
+                                    MODUL 02
+                                </span>
+                            </div>
+
+                            <h3 class="font-heading text-xl sm:text-2xl font-bold text-white group-hover:text-cyan-300 transition-colors mb-3">
+                                WEB BROWSER DAN SEARCH ENGINE
+                            </h3>
+
+                            <!-- Topic Tags -->
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="text-[11px] font-mono px-2.5 py-0.5 rounded-md bg-navy-800 text-slate-300 border border-slate-700/80">Web Browser</span>
+                                <span class="text-[11px] font-mono px-2.5 py-0.5 rounded-md bg-navy-800 text-slate-300 border border-slate-700/80">Search Engine</span>
+                                <span class="text-[11px] font-mono px-2.5 py-0.5 rounded-md bg-navy-800 text-slate-300 border border-slate-700/80">Literasi Digital</span>
+                            </div>
+
+                            <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-8">
+                                Kenali cara kerja web browser dan search engine, teknik pencarian informasi yang efektif, serta cara mengevaluasi informasi di internet.
+                            </p>
+                        </div>
+
+                        <div class="pt-4 border-t border-slate-800/80 flex items-center justify-between">
+                            <a href="browser.html" data-page="browser.html" class="w-full inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl font-heading font-semibold text-sm text-white bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 shadow-lg shadow-blue-600/20 group-hover:shadow-cyan-500/30 transition-all duration-300">
+                                <span>JELAJAHI MATERI</span>
+                                <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- MENU 3 – APLIKASI PENGOLAH KATA -->
+                    <article class="glass-card rounded-3xl p-7 sm:p-8 flex flex-col justify-between group reveal">
+                        <div>
+                            <div class="flex items-start justify-between gap-4 mb-6">
+                                <!-- Illustrative SVG Icon: Digital Document, Word/Docs, Formatting -->
+                                <div class="card-icon-wrapper w-16 h-16 rounded-2xl bg-gradient-to-br from-indigo-600/30 to-cyan-500/20 border border-indigo-400/35 flex items-center justify-center shrink-0">
+                                    <svg class="w-9 h-9" viewBox="0 0 36 36" fill="none">
+                                        <!-- Digital Document Sheet -->
+                                        <path d="M8 5C8 3.89543 8.89543 3 10 3H22L28 9V31C28 32.1046 27.1046 33 26 33H10C8.89543 33 8 32.1046 8 31V5Z" fill="#0D193B" stroke="#38BDF8" stroke-width="2"/>
+                                        <path d="M22 3V9H28" stroke="#38BDF8" stroke-width="2" stroke-linejoin="round"/>
+                                        <!-- Document Typography Lines -->
+                                        <rect x="12" y="13" width="7" height="5" rx="1" fill="#2563EB" stroke="#93C5FD" stroke-width="1.2"/>
+                                        <line x1="21" y1="14.5" x2="24" y2="14.5" stroke="#22D3EE" stroke-width="1.8" stroke-linecap="round"/>
+                                        <line x1="21" y1="17.5" x2="24" y2="17.5" stroke="#22D3EE" stroke-width="1.8" stroke-linecap="round"/>
+                                        <line x1="12" y1="22" x2="24" y2="22" stroke="#94A3B8" stroke-width="1.8" stroke-linecap="round"/>
+                                        <line x1="12" y1="26" x2="21" y2="26" stroke="#94A3B8" stroke-width="1.8" stroke-linecap="round"/>
+                                    </svg>
+                                </div>
+                                <span class="px-3 py-1 rounded-full text-xs font-mono font-semibold bg-indigo-500/15 text-indigo-300 border border-indigo-400/30">
+                                    MODUL 03
+                                </span>
+                            </div>
+
+                            <h3 class="font-heading text-xl sm:text-2xl font-bold text-white group-hover:text-cyan-300 transition-colors mb-3">
+                                APLIKASI PENGOLAH KATA
+                            </h3>
+
+                            <!-- Topic Tags -->
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="text-[11px] font-mono px-2.5 py-0.5 rounded-md bg-navy-800 text-slate-300 border border-slate-700/80">Microsoft Word</span>
+                                <span class="text-[11px] font-mono px-2.5 py-0.5 rounded-md bg-navy-800 text-slate-300 border border-slate-700/80">Google Docs</span>
+                                <span class="text-[11px] font-mono px-2.5 py-0.5 rounded-md bg-navy-800 text-slate-300 border border-slate-700/80">Dokumen Digital</span>
+                            </div>
+
+                            <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-8">
+                                Pelajari penggunaan aplikasi pengolah kata untuk membuat, mengedit, memformat, dan menyusun dokumen digital secara profesional.
+                            </p>
+                        </div>
+
+                        <div class="pt-4 border-t border-slate-800/80 flex items-center justify-between">
+                            <a href="pengolah-kata.html" data-page="pengolah-kata.html" class="w-full inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl font-heading font-semibold text-sm text-white bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 shadow-lg shadow-blue-600/20 group-hover:shadow-cyan-500/30 transition-all duration-300">
+                                <span>JELAJAHI MATERI</span>
+                                <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- MENU 4 – LATIHAN SAS -->
+                    <article class="glass-card rounded-3xl p-7 sm:p-8 flex flex-col justify-between group border-purple-500/25 hover:border-purple-400/60 reveal">
+                        <div>
+                            <div class="flex items-start justify-between gap-4 mb-6">
+                                <!-- Illustrative SVG Icon: Clipboard, Checklist, Graduation Cap -->
+                                <div class="card-icon-wrapper w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-600/30 to-blue-600/25 border border-purple-400/40 flex items-center justify-center shrink-0">
+                                    <svg class="w-9 h-9" viewBox="0 0 36 36" fill="none">
+                                        <!-- Clipboard -->
+                                        <rect x="7" y="7" width="18" height="24" rx="3" fill="#0D193B" stroke="#C084FC" stroke-width="2"/>
+                                        <path d="M12 7V5.5C12 4.67157 12.6716 4 13.5 4H18.5C19.3284 4 20 4.67157 20 5.5V7" stroke="#22D3EE" stroke-width="2"/>
+                                        <!-- Checklist items -->
+                                        <path d="M11 14L13 16L16.5 12.5" stroke="#34D399" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <line x1="19" y1="14.5" x2="22" y2="14.5" stroke="#94A3B8" stroke-width="1.8" stroke-linecap="round"/>
+                                        <path d="M11 20L13 22L16.5 18.5" stroke="#34D399" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <line x1="19" y1="20.5" x2="22" y2="20.5" stroke="#94A3B8" stroke-width="1.8" stroke-linecap="round"/>
+                                        <!-- Mini Graduation Cap Badge -->
+                                        <polygon points="27,21 34,24.5 27,28 20,24.5" fill="#7C3AED" stroke="#E879F9" stroke-width="1.5"/>
+                                        <path d="M23 26.5V30C23 30 25 31.5 27 31.5C29 31.5 31 30 31 30V26.5" stroke="#E879F9" stroke-width="1.5"/>
+                                    </svg>
+                                </div>
+                                <span class="px-3 py-1 rounded-full text-xs font-mono font-semibold bg-purple-500/20 text-purple-300 border border-purple-400/35">
+                                    EVALUASI SAS
+                                </span>
+                            </div>
+
+                            <h3 class="font-heading text-xl sm:text-2xl font-bold text-white group-hover:text-purple-300 transition-colors mb-3">
+                                LATIHAN SAS
+                            </h3>
+
+                            <!-- Topic Tags -->
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="text-[11px] font-mono px-2.5 py-0.5 rounded-md bg-navy-800 text-purple-200 border border-purple-500/30">Tryout SAS</span>
+                                <span class="text-[11px] font-mono px-2.5 py-0.5 rounded-md bg-navy-800 text-purple-200 border border-purple-500/30">Pembahasan</span>
+                                <span class="text-[11px] font-mono px-2.5 py-0.5 rounded-md bg-navy-800 text-purple-200 border border-purple-500/30">Skor Otomatis</span>
+								<span class="text-[11px] font-mono px-2.5 py-0.5 rounded-md bg-navy-800 text-purple-200 border border-purple-500/30">CBT (Computer-Based Test)</span>
+                            </div>
+
+                            <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-8">
+                                Uji pemahamanmu melalui latihan soal Sumatif Akhir Semester (SAS) Informatika. Kerjakan soal dengan sistem CBT serta pelajari pembahasannya.
+                            </p>
+                        </div>
+
+                        <div class="pt-4 border-t border-slate-800/80 flex items-center justify-between">
+                            <a href="https://cbt-informatika-ten.vercel.app/" target="_blank" rel="noopener noreferrer"  class="w-full inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl font-heading font-semibold text-sm text-white bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 shadow-lg shadow-purple-600/25 group-hover:shadow-purple-500/40 transition-all duration-300">
+                                <span>MULAI LATIHAN</span>
+                                <i data-lucide="play-circle" class="w-4 h-4 group-hover:scale-110 transition-transform"></i>
+                            </a>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 5. SECTION MOTIVASI ==================== -->
+        <section class="py-16 lg:py-20 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="relative rounded-3xl overflow-hidden glass-card border-cyan-400/25 p-8 sm:p-12 lg:p-14 reveal">
+                    <!-- Decorative Background Glows -->
+                    <div class="absolute -top-24 -right-24 w-80 h-80 bg-cyan-500/20 rounded-full blur-[90px] pointer-events-none"></div>
+                    <div class="absolute -bottom-24 -left-24 w-80 h-80 bg-purple-600/20 rounded-full blur-[90px] pointer-events-none"></div>
+
+                    <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                        <!-- Text Content -->
+                        <div class="lg:col-span-8 space-y-5 text-center lg:text-left">
+                            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/15 border border-cyan-400/30 text-cyan-300 text-xs font-mono tracking-widest uppercase">
+                                <i data-lucide="cpu" class="w-3.5 h-3.5"></i>
+                                <span>Computational Thinking Mindset</span>
+                            </div>
+
+                            <h2 class="font-heading text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight leading-tight">
+                                THINK SMART. <span class="text-cyan-400">WORK SMART.</span> <span class="text-purple-400">CREATE MORE.</span>
+                            </h2>
+
+                            <p class="text-slate-200 text-base sm:text-lg leading-relaxed font-normal">
+                                "Informatika bukan hanya tentang komputer dan teknologi. Informatika mengajarkan kita bagaimana berpikir logis, memecahkan masalah, mencari informasi, dan menciptakan solusi untuk kehidupan sehari-hari."
+                            </p>
+                        </div>
+
+                        <!-- Digital Brain & Logic Circuit SVG Illustration -->
+                        <div class="lg:col-span-4 flex justify-center">
+                            <div class="relative w-56 h-56 sm:w-64 sm:h-64 flex items-center justify-center">
+                                <svg class="w-full h-full animate-float-slow" viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="120" cy="120" r="95" stroke="url(#cyberStroke)" stroke-width="1.5" stroke-dasharray="6 6"/>
+                                    <circle cx="120" cy="120" r="72" fill="#070E24" stroke="#22D3EE" stroke-width="2" stroke-opacity="0.5"/>
+                                    <!-- Stylized Geometric Cube / Core Processor -->
+                                    <polygon points="120,62 170,91 170,149 120,178 70,149 70,91" fill="#0D193B" stroke="#38BDF8" stroke-width="2.5"/>
+                                    <polyline points="70,91 120,120 170,91" stroke="#22D3EE" stroke-width="2"/>
+                                    <line x1="120" y1="120" x2="120" y2="178" stroke="#A855F7" stroke-width="2"/>
+                                    <!-- Glowing Nodes -->
+                                    <circle cx="120" cy="62" r="5" fill="#22D3EE"/>
+                                    <circle cx="170" cy="91" r="5" fill="#3B82F6"/>
+                                    <circle cx="70" cy="91" r="5" fill="#A855F7"/>
+                                    <circle cx="120" cy="120" r="6" fill="#F8FAFC"/>
+                                    <circle cx="120" cy="178" r="5" fill="#22D3EE"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 6. SECTION TIPS BELAJAR ==================== -->
+        <section id="tentang" class="py-16 lg:py-24 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <!-- Section Title -->
+                <div class="text-center max-w-2xl mx-auto mb-14 reveal">
+                    <span class="text-xs font-mono uppercase tracking-widest text-cyan-400">Strategi Belajar Efektif</span>
+                    <h2 class="font-heading text-2xl sm:text-3xl font-bold text-white mt-2">
+                        3 Kunci Sukses Menguasai <span class="text-gradient-cyan">Informatika</span>
+                    </h2>
+                </div>
+
+                <!-- 3 Tip Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+                    
+                    <!-- Tip 1: EXPLORE -->
+                    <div class="glass-card rounded-2xl p-7 text-center sm:text-left reveal">
+                        <div class="card-icon-wrapper w-14 h-14 rounded-2xl bg-cyan-500/15 border border-cyan-400/30 flex items-center justify-center mx-auto sm:mx-0 mb-5 text-cyan-400">
+                            <i data-lucide="compass" class="w-7 h-7"></i>
+                        </div>
+                        <div class="inline-block text-xs font-mono font-semibold text-cyan-400 tracking-wider mb-1">01 • SIKAP AKTIF</div>
+                        <h3 class="font-heading text-xl font-bold text-white mb-2.5">EXPLORE</h3>
+                        <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                            "Jangan takut mencoba dan mengeksplorasi teknologi baru."
+                        </p>
+                    </div>
+
+                    <!-- Tip 2: UNDERSTAND -->
+                    <div class="glass-card rounded-2xl p-7 text-center sm:text-left reveal">
+                        <div class="card-icon-wrapper w-14 h-14 rounded-2xl bg-blue-500/15 border border-blue-400/30 flex items-center justify-center mx-auto sm:mx-0 mb-5 text-blue-400">
+                            <i data-lucide="brain-circuit" class="w-7 h-7"></i>
+                        </div>
+                        <div class="inline-block text-xs font-mono font-semibold text-blue-400 tracking-wider mb-1">02 • LOGIKA KUAT</div>
+                        <h3 class="font-heading text-xl font-bold text-white mb-2.5">UNDERSTAND</h3>
+                        <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                            "Pahami konsepnya, bukan sekadar menghafalkan materinya."
+                        </p>
+                    </div>
+
+                    <!-- Tip 3: PRACTICE -->
+                    <div class="glass-card rounded-2xl p-7 text-center sm:text-left reveal">
+                        <div class="card-icon-wrapper w-14 h-14 rounded-2xl bg-purple-500/15 border border-purple-400/30 flex items-center justify-center mx-auto sm:mx-0 mb-5 text-purple-400">
+                            <i data-lucide="terminal" class="w-7 h-7"></i>
+                        </div>
+                        <div class="inline-block text-xs font-mono font-semibold text-purple-400 tracking-wider mb-1">03 • KETERAMPILAN NYATA</div>
+                        <h3 class="font-heading text-xl font-bold text-white mb-2.5">PRACTICE</h3>
+                        <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                            "Terapkan pengetahuan melalui latihan dan praktik langsung."
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ==================== 7. FOOTER ==================== -->
+    <footer class="relative z-10 border-t border-cyan-500/15 bg-navy-950/90 backdrop-blur-xl pt-12 pb-24 sm:pb-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 pb-10 border-b border-slate-800/80 items-start">
+                
+                <!-- Brand & Motto -->
+                <div class="md:col-span-6 space-y-3">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-600 to-cyan-500 flex items-center justify-center text-white shadow-md">
+                            <i data-lucide="cpu" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-heading font-bold text-lg text-white tracking-wide">
+                            INFORMATIKA LEARNING HUB
+                        </span>
+                    </div>
+                    <p class="text-cyan-300/90 font-medium text-sm sm:text-base">
+                        "Belajar Teknologi, Berpikir Logis, Berkarya Digital."
+                    </p>
+                    <p class="text-slate-400 text-xs sm:text-sm max-w-md leading-relaxed">
+                        Portal pembelajaran digital interaktif yang dirancang khusus untuk mendukung kompetensi literasi digital dan berpikir komputasional siswa SMK.
+                    </p>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="md:col-span-3 space-y-2.5">
+                    <h4 class="font-heading font-semibold text-sm uppercase tracking-wider text-white">Navigasi Modul</h4>
+                    <ul class="space-y-2 text-sm text-slate-400">
+                        <li><a href="algoritma.html" data-page="algoritma.html" class="hover:text-cyan-400 transition-colors">Algoritma & Flowchart</a></li>
+                        <li><a href="browser.html" data-page="browser.html" class="hover:text-cyan-400 transition-colors">Web Browser & Search Engine</a></li>
+                        <li><a href="pengolah-kata.html" data-page="pengolah-kata.html" class="hover:text-cyan-400 transition-colors">Aplikasi Pengolah Kata</a></li>
+                        <li><a href="latihan-sas.html" data-page="latihan-sas.html" class="hover:text-purple-400 transition-colors">Latihan Soal SAS</a></li>
+                    </ul>
+                </div>
+
+                <!-- Academic Info Badge -->
+                <div class="md:col-span-3 space-y-2.5">
+                    <h4 class="font-heading font-semibold text-sm uppercase tracking-wider text-white">Informasi Akademik</h4>
+                    <div class="p-4 rounded-2xl bg-navy-900/80 border border-slate-800 space-y-2 text-xs sm:text-sm">
+                        <div class="flex justify-between">
+                            <span class="text-slate-400">Mata Pelajaran:</span>
+                            <span class="font-semibold text-white">Informatika</span>
+                        </div>
+						<div class="flex justify-between">
+                            <span class="text-slate-400">Guru:</span>
+                            <span class="font-semibold text-white">I Gusti Bagus Hari Sastrawan</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-400">Jenjang:</span>
+                            <span class="font-semibold text-cyan-400">Kelas X SMK</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-400">Tahun Pelajaran:</span>
+                            <span class="font-semibold text-purple-300">2026/2027</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Copyright Line -->
+            <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs sm:text-sm text-slate-400">
+                <p>Copyright &copy; 2026 Informatika Learning Hub. All rights reserved.</p>
+                <p class="font-mono text-xs text-slate-500">Explore • Learn • Create</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== INTERACTIVE MODULE PREVIEW MODAL (Fallback jika file sub-halaman dibuka dalam mode pratinjau tunggal) ==================== -->
+    <div id="module-modal" class="fixed inset-0 z-[70] hidden items-center justify-center p-4 bg-navy-950/85 backdrop-blur-md">
+        <div class="relative w-full max-w-2xl rounded-3xl bg-navy-900 border border-cyan-400/35 shadow-[0_25px_60px_rgba(0,0,0,0.75)] overflow-hidden transform transition-all">
+            <!-- Modal Header -->
+            <div class="flex items-center justify-between px-6 py-4 bg-navy-800/90 border-b border-cyan-500/20">
+                <div class="flex items-center gap-2.5">
+                    <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse"></span>
+                    <span id="modal-file-badge" class="font-mono text-xs text-cyan-300 bg-cyan-500/10 px-2.5 py-1 rounded-md border border-cyan-500/25">modul.html</span>
+                </div>
+                <button id="close-modal-btn" aria-label="Tutup Pratinjau" class="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-white/10 transition-colors">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+            <!-- Modal Dynamic Body -->
+            <div id="modal-body" class="p-6 sm:p-8 max-h-[78vh] overflow-y-auto space-y-5">
+                <!-- Content populated via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== VANILLA JAVASCRIPT (assets/js/script.js) ==================== -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Initialize Lucide Icons
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+
+            // 2. Mobile Hamburger Menu Toggle
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+            function toggleMobileMenu() {
+                const isExpanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
+                mobileMenuBtn.setAttribute('aria-expanded', !isExpanded);
+                mobileMenuBtn.classList.toggle('hamburger-open');
+                mobileMenu.classList.toggle('hidden');
+            }
+
+            mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        toggleMobileMenu();
+                    }
+                });
+            });
+
+            // 3. Scroll Progress Bar, Sticky Navbar State & Floating Quick-Tab Dock
+            const scrollProgress = document.getElementById('scroll-progress');
+            const navbar = document.getElementById('navbar');
+            const floatingTabBar = document.getElementById('floating-tab-bar');
+            const scrollTopBtn = document.getElementById('scroll-top-btn');
+
+            function handleScroll() {
+                const scrollTop = window.scrollY || document.documentElement.scrollTop;
+                const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrollPercent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+
+                // Update top progress indicator
+                scrollProgress.style.width = `${scrollPercent}%`;
+
+                // Update sticky navbar glass effect
+                if (scrollTop > 30) {
+                    navbar.classList.add('glass-nav-scrolled');
+                } else {
+                    navbar.classList.remove('glass-nav-scrolled');
+                }
+
+                // Show/hide floating quick-nav tab dock when scrolled down
+                if (scrollTop > 320) {
+                    floatingTabBar.classList.remove('translate-y-24', 'opacity-0', 'pointer-events-none');
+                    floatingTabBar.classList.add('translate-y-0', 'opacity-100', 'pointer-events-auto');
+                } else {
+                    floatingTabBar.classList.add('translate-y-24', 'opacity-0', 'pointer-events-none');
+                    floatingTabBar.classList.remove('translate-y-0', 'opacity-100', 'pointer-events-auto');
+                }
+            }
+
+            window.addEventListener('scroll', handleScroll, { passive: true });
+            handleScroll();
+
+            scrollTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // 4. Intersection Observer for Smooth Scroll Reveal Animations
+            const revealElements = document.querySelectorAll('.reveal');
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach((entry, idx) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.classList.add('active');
+                        }, idx * 70);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.12,
+                rootMargin: '0px 0px -40px 0px'
+            });
+
+            revealElements.forEach(el => revealObserver.observe(el));
+
+            // 5. Sub-page Navigation Handler (Menjaga link asli sesuai struktur proyek + Pratinjau Interaktif instan jika file belum ada di server)
+            const moduleData = {
+                'algoritma.html': {
+                    title: 'Modul 1: Algoritma dan Flowchart',
+                    badge: 'algoritma.html',
+                    summary: 'Mempelajari fondasi berpikir komputasional, notasi deskriptif, pseudocode, serta simbol-simbol standar diagram alir (Terminator, Process, Decision, Input/Output).',
+                    topics: [
+                        'Konsep Dasar Algoritma & Berpikir Komputasional',
+                        'Simbol-simbol Standar Flowchart & Fungsinya',
+                        'Struktur Percabangan (If-Else) & Perulangan (Looping)',
+                        'Studi Kasus Pemecahan Masalah Sehari-hari'
+                    ],
+                    accent: 'cyan'
+                },
+                'browser.html': {
+                    title: 'Modul 2: Web Browser dan Search Engine',
+                    badge: 'browser.html',
+                    summary: 'Memahami arsitektur cara kerja peramban web (HTTP/HTTPS, URL, DNS), algoritma mesin pencari (Crawling, Indexing, Ranking), serta teknik pencarian presisi.',
+                    topics: [
+                        'Anatomi & Fitur Keamanan Web Browser Modern',
+                        'Cara Kerja Mesin Pencari (Search Engine)',
+                        'Operator Pencarian Lanjutan (Boolean & Exact Match)',
+                        'Evaluasi Kredibilitas Informasi & Anti-Hoaks'
+                    ],
+                    accent: 'blue'
+                },
+                'pengolah-kata.html': {
+                    title: 'Modul 3: Aplikasi Pengolah Kata',
+                    badge: 'pengolah-kata.html',
+                    summary: 'Menguasai keterampilan penyusunan dokumen digital standar industri menggunakan Microsoft Word dan Google Docs secara kolaboratif dan efisien.',
+                    topics: [
+                        'Pengaturan Tata Letak Halaman (Margin, Orientation, Size)',
+                        'Penggunaan Styles, Heading, & Daftar Isi Otomatis',
+                        'Integrasi Tabel, Grafik, Ilustrasi, & Equation',
+                        'Kolaborasi Real-time & Ekspor Dokumen PDF'
+                    ],
+                    accent: 'indigo'
+                },
+                'latihan-sas.html': {
+                    title: 'Evaluasi: Latihan Soal Sumatif Akhir Semester (SAS)',
+                    badge: 'latihan-sas.html',
+                    isQuiz: true
+                }
+            };
+
+            const modal = document.getElementById('module-modal');
+            const modalBody = document.getElementById('modal-body');
+            const modalFileBadge = document.getElementById('modal-file-badge');
+            const closeModalBtn = document.getElementById('close-modal-btn');
+
+            function openModulePreview(pageKey) {
+                const data = moduleData[pageKey];
+                if (!data) return;
+
+                modalFileBadge.textContent = `Target File: ${data.badge}`;
+
+                if (data.isQuiz) {
+                    // Mini Interactive SAS Sample Question inside Modal
+                    modalBody.innerHTML = `
+                        <div class="space-y-4">
+                            <span class="inline-block px-3 py-1 rounded-full text-xs font-mono bg-purple-500/20 text-purple-300 border border-purple-400/30">SIMULASI SOAL SAS INFORMATIKA X</span>
+                            <h3 class="font-heading text-2xl font-bold text-white">${data.title}</h3>
+                            <p class="text-slate-300 text-sm">Halaman ini terhubung ke <code class="text-cyan-300 font-mono">latihan-sas.html</code>. Coba contoh soal pemanasan berikut:</p>
+                            
+                            <div class="p-5 rounded-2xl bg-navy-950/90 border border-slate-700/80 space-y-4">
+                                <p class="text-white font-medium text-sm sm:text-base">
+                                    1. Simbol flowchart yang berbentuk belah ketupat (diamond) digunakan untuk menyatakan proses...
+                                </p>
+                                <div class="space-y-2.5" id="quiz-options">
+                                    <button type="button" data-correct="false" class="quiz-opt w-full text-left px-4 py-3 rounded-xl bg-navy-800/80 hover:bg-navy-700 border border-slate-700 text-sm text-slate-200 transition-all">
+                                        A. Awal dan akhir suatu program (Terminator)
+                                    </button>
+                                    <button type="button" data-correct="true" class="quiz-opt w-full text-left px-4 py-3 rounded-xl bg-navy-800/80 hover:bg-navy-700 border border-slate-700 text-sm text-slate-200 transition-all">
+                                        B. Pengambilan keputusan berdasarkan kondisi Ya/Tidak (Decision)
+                                    </button>
+                                    <button type="button" data-correct="false" class="quiz-opt w-full text-left px-4 py-3 rounded-xl bg-navy-800/80 hover:bg-navy-700 border border-slate-700 text-sm text-slate-200 transition-all">
+                                        C. Pengolahan data atau perhitungan aritmatika (Process)
+                                    </button>
+                                </div>
+                                <div id="quiz-feedback" class="hidden p-3.5 rounded-xl text-xs sm:text-sm"></div>
+                            </div>
+                        </div>
+                    `;
+
+                    // Attach quiz interaction
+                    const opts = modalBody.querySelectorAll('.quiz-opt');
+                    const feedback = modalBody.querySelector('#quiz-feedback');
+                    opts.forEach(btn => {
+                        btn.addEventListener('click', () => {
+                            const isCorrect = btn.getAttribute('data-correct') === 'true';
+                            feedback.classList.remove('hidden');
+                            if (isCorrect) {
+                                btn.classList.add('border-emerald-400', 'bg-emerald-500/20', 'text-emerald-200');
+                                feedback.className = 'p-3.5 rounded-xl text-xs sm:text-sm bg-emerald-500/15 border border-emerald-400/30 text-emerald-200';
+                                feedback.innerHTML = '<strong>Tepat sekali!</strong> Simbol belah ketupat adalah <em>Decision</em> yang berfungsi mengevaluasi kondisi logika (True/False).';
+                            } else {
+                                btn.classList.add('border-rose-400', 'bg-rose-500/20', 'text-rose-200');
+                                feedback.className = 'p-3.5 rounded-xl text-xs sm:text-sm bg-rose-500/15 border border-rose-400/30 text-rose-200';
+                                feedback.innerHTML = '<strong>Kurang tepat.</strong> Coba perhatikan kembali fungsi simbol belah ketupat pada diagram alir.';
+                            }
+                        });
+                    });
+                } else {
+                    const topicListHtml = data.topics.map(t => `
+                        <li class="flex items-start gap-2.5 text-sm text-slate-200">
+                            <span class="mt-1 w-2 h-2 rounded-full bg-cyan-400 shrink-0"></span>
+                            <span>${t}</span>
+                        </li>
+                    `).join('');
+
+                    modalBody.innerHTML = `
+                        <div class="space-y-4">
+                            <h3 class="font-heading text-2xl font-bold text-white">${data.title}</h3>
+                            <p class="text-slate-300 text-sm sm:text-base leading-relaxed">${data.summary}</p>
+                            <div class="p-5 rounded-2xl bg-navy-950/90 border border-cyan-500/20 space-y-3">
+                                <h4 class="font-heading text-xs font-semibold uppercase tracking-wider text-cyan-300">Pokok Bahasan Utama:</h4>
+                                <ul class="space-y-2.5">${topicListHtml}</ul>
+                            </div>
+                            <div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2">
+                                <span class="text-xs text-slate-400">Struktur file siap dikembangkan pada <code class="text-cyan-300">${data.badge}</code></span>
+                                <button type="button" id="modal-ok-btn" class="w-full sm:w-auto px-5 py-2.5 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-blue-600 to-cyan-500 hover:brightness-110 transition-all">
+                                    Mengerti & Lanjutkan
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    modalBody.querySelector('#modal-ok-btn').addEventListener('click', closeModal);
+                }
+
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+            }
+
+            function closeModal() {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }
+
+            closeModalBtn.addEventListener('click', closeModal);
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) closeModal();
+            });
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && !modal.classList.contains('hidden')) closeModal();
+            });
+
+            // Intercept clicks on sub-page links only when running in single-file preview environment
+            // so users never hit a dead link while keeping real href attributes intact
+            document.querySelectorAll('a[data-page]').forEach(anchor => {
+                anchor.addEventListener('click', (e) => {
+                    const page = anchor.getAttribute('data-page');
+                    // Check if running inside standalone preview (blob/srcdoc/file without sibling files)
+                    if (window.location.protocol === 'blob:' || window.location.protocol === 'about:' || window.self !== window.top) {
+                        e.preventDefault();
+                        openModulePreview(page);
+                    }
+                });
+            });
+
+            // 6. Lightweight Digital Network Particle Canvas Animation
+            const canvas = document.getElementById('network-canvas');
+            const ctx = canvas.getContext('2d');
+            let particles = [];
+            let animationFrameId;
+
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.vx = (Math.random() - 0.5) * 0.35;
+                    this.vy = (Math.random() - 0.5) * 0.35;
+                    this.radius = Math.random() * 1.8 + 0.8;
+                }
+                update() {
+                    this.x += this.vx;
+                    this.y += this.vy;
+                    if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                    if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+                }
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(56, 189, 248, 0.55)';
+                    ctx.fill();
+                }
+            }
+
+            function initParticles() {
+                particles = [];
+                const count = Math.min(Math.floor((canvas.width * canvas.height) / 22000), 55);
+                for (let i = 0; i < count; i++) {
+                    particles.push(new Particle());
+                }
+            }
+
+            function animateNetwork() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                for (let i = 0; i < particles.length; i++) {
+                    particles[i].update();
+                    particles[i].draw();
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const dx = particles[i].x - particles[j].x;
+                        const dy = particles[i].y - particles[j].y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+                        if (dist < 135) {
+                            ctx.beginPath();
+                            ctx.strokeStyle = `rgba(34, 211, 238, ${0.14 * (1 - dist / 135)})`;
+                            ctx.lineWidth = 0.8;
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+                animationFrameId = requestAnimationFrame(animateNetwork);
+            }
+
+            resizeCanvas();
+            initParticles();
+            animateNetwork();
+
+            window.addEventListener('resize', () => {
+                resizeCanvas();
+                initParticles();
+            });
+        });
+    </script>
+</body>
+</html>
